@@ -1,8 +1,9 @@
 
 '''
-clases importadas 
+clase arbolAVL c 
 '''
 from Nodo2 import NodoAVL
+
 class ArbolAVL:
     '''
     clase de arbol AVL
@@ -28,6 +29,9 @@ class ArbolAVL:
             self.search(node.hizq,value)
     
     def obtnerFE(self,node):
+        '''
+        obtiene el factor de equilibrio:
+        '''
         if node is None:
             return -1
         else:
@@ -35,7 +39,7 @@ class ArbolAVL:
     @staticmethod
     def max(a,b):
         """
-        docstring
+        Metodo statico de obtner el maximo de 2 numeros
         """
         if(a>b):
             return a
@@ -44,6 +48,9 @@ class ArbolAVL:
        
     #----rotacion simple izquierda
     def rotationLeftS(self,node):
+        '''
+        rotacion simple a la izquierda
+        '''
         aux1=node.hizq
         node.hizq=aux1.hder
         aux1.hder=node
@@ -52,6 +59,9 @@ class ArbolAVL:
 
         return aux1
     def rotationRightS(self,node):
+        '''
+        rotacion simple a la derecha
+        '''
         aux1=node.hder
         node.hder=aux1.hizq
         aux1.hizq=node
@@ -61,18 +71,27 @@ class ArbolAVL:
         return aux1
     
     def rotationLeftD(self,node):
+        '''
+        rotacion doble a la izquierda
+        '''
         #aux=NodoAVL
         node.hizq=self.rotationRightS(node.hizq)
         aux=self.rotationLeftS(node)
         return aux
 
     def rotatioRightD(self,node):
+        '''
+        rotacion doble a la derecha
+        '''
         node.hder=self.rotationLeftS(node.hder)
         aux=self.rotationRightS(node)
         return aux
     
     #insertar
     def Insert(self,node,subnode):
+        """
+        inserta revisando el dactor de equilibrio
+        """
         npadre=subnode
         if(node.dato<subnode.dato):
             if(subnode.hizq==None):
@@ -97,6 +116,8 @@ class ArbolAVL:
                         npadre=self.rotatioRightD(subnode)
         else:
             print("dato duplicado")
+
+         #actualiazcion de factor e   
         if((subnode.hizq==None) and (subnode.hder!=None)):
             subnode.fe=subnode.hder.fe+1
         elif((subnode.hder == None) and (subnode.hizq!=None)):
@@ -106,6 +127,9 @@ class ArbolAVL:
         return npadre
         
     def insertN(self,value):
+        """
+        metodo insertar normal
+        """
         nodo=NodoAVL(value)
         if(self.root is None):
             self.root=nodo
@@ -114,6 +138,9 @@ class ArbolAVL:
   
 
     def preOrden(self,node):
+        """
+        recorrido en preorden
+        """
         if(node is not None):
             print(node.dato)
             self.preOrden(node.hizq)

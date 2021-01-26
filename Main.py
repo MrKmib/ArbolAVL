@@ -2,6 +2,9 @@ from Nodo2 import NodoAVL
 from ArbolB import ArbolAVL
 
 def main():
+    '''
+    main donde se crea la instansiacion del objeto
+    '''
     a=ArbolAVL()
     a.insertN(3)
     a.insertN(2)
